@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web communication</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 50px;
+            font-family: 'Noto Sans', sans-serif;
+            background-color: rgb(25, 25, 25);
+        }
+
+        .request-block {
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+            flex-wrap: wrap;
+            align-content: center;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .reponse {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .request-button {
+            background-color: deepskyblue;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+<div class="request-block">
+    <h2>AJAX</h2>
+    <button class="request-button" onclick="ajax_request()">Requête ajax</button>
+    <p>Retour de la fonction</p>
+    <p class="reponse" id="reponse_ajax"></p>
+</div>
+<div class="request-block">
+    <h2>FETCH</h2>
+    <button class="request-button" onclick="fetch_request()">Requête fetch</button>
+    <p>Retour de la fonction</p>
+    <p class="reponse" id="reponse_fetch"></p>
+</div>
+</body>
+<script>
+    function ajax_request() {
+        let request = new XMLHttpRequest();
+        request.open('GET', 'http://localhost:8080/helloworld', true);
+        request.send();
+
+        request.onreadystatechange = () => {
+            if (request.readyState === XMLHttpRequest.DONE) {
+                if (request.status === 200) {
+                    document.querySelector("#reponse_ajax").innerHTML = request.responseText;
+                }
+            }
+        }
+    }
+
+    function fetch_request() {
+
+    }
+</script>
+</html>

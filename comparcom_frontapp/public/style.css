@@ -72,6 +72,12 @@ body {
     padding: 0;
 }
 
+.request-config {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
 @media (max-width: 900px) {
     #app{
         grid-template-columns: repeat(2, 1fr);

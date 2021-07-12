@@ -1,9 +1,7 @@
 <template>
   <div>
     <request-configurator v-model="requestConfiguration" />
-    {{ requestConfiguration.host_server }}
-    {{ requestConfiguration.server_resource }}
-    {{ requestConfiguration.http_method }}
+
     <section class="request-card">
       <request-card
         title="AJAX"
@@ -40,17 +38,20 @@ export default {
         host_server: "http://localhost:8080",
         server_resource: "/helloworld",
         http_method: "GET",
+        payload: "",
       },
     };
   },
+  computed: {
+    url() {
+      return `${this.requestConfiguration.host_server}${this.requestConfiguration.server_resource}`;
+    },
+  },
   methods: {
     ajax_request: function () {
+      console.log(this.url);
       let request = new XMLHttpRequest();
-      request.open(
-        this.requestConfiguration.http_method,
-        `${this.requestConfiguration.host_server}${this.requestConfiguration.resource_server}`,
-        true
-      );
+      request.open(this.requestConfiguration.http_method, this.url, true);
       request.send();
 
       request.onreadystatechange = () => {

@@ -99,17 +99,20 @@ export default {
     websocket_request: function () {
       let socket = new SockJS("http://localhost:8080/websocket");
       let stompClient = Stomp.over(socket);
+      stompClient.debug = null;
       stompClient.connect({}, (frame) => {
         stompClient.subscribe("/helloJS", (message) => {
           let body = message.body;
           delete message.body;
           this.websocket.headers = [message.headers];
           this.websocket.body = body;
+          socket.close();
         });
 
         stompClient.send("/helloSpring", {}, "Javascript say hello to Spring");
       });
     },
+    socketio_request: function () {},
   },
 };
 </script>

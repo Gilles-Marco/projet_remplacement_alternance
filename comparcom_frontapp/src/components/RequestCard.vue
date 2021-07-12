@@ -6,8 +6,8 @@
     </button>
     <slot name="result">
       <request-card-result
-        :headerArray="headerArray"
-        :bodyString="bodyString"
+        :headers="headers"
+        :body="body"
       ></request-card-result>
     </slot>
   </div>
@@ -22,13 +22,13 @@ export default {
       type: String,
       default: "",
     },
-    headerArray: {
-      type: Array,
+    headers: {
+      type: [String, Array, Object],
       default: function () {
         return [];
       },
     },
-    bodyString: {
+    body: {
       type: String,
       default: "",
     },

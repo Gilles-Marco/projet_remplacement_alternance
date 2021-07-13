@@ -66,12 +66,12 @@ On utilise socket.io-client en version 1.7.4 malgré qu'elle date d'il y a 4 ans
 - SpringBoot websocket
 - netty-socketio
 
-# Difficulté rencontré
+# Difficultés rencontrées
 
 - Aucune difficulté rencontré pour les requêtes AJAX et FETCH.
 
-- Pour les websockets nous avons rencontré une difficulté, SpringBoot Websocket.
+- Pour les websockets nous avons rencontré une difficulté, SpringBoot Websocket utilise un autre protocole par-dessus les websockets, il utilise le protocole STOMP qui a causé l'ajout d'une dépendance au client javascript.
 De plus pour les websockets lors de la réponse du serveur au client, le serveur émet un broadcast sur le topic plutôt que de répondre uniquement au client. C'est un des problèmes de websocket c'est que l'implémentation d'une authentification d'utilisateurs et de leur émettre une réponse qu'à eux est plus difficile qu'avec socket.io.
 
-- Pour socket.io la difficulté que nous avons rencontré était pour faire communiquer le serveur java et le client javascript. En effet nous utilisions la dernière version de socket.io-client sur le client javascript (4.1.3) et nos tentatives de connexions au serveur ne fonctionnait pas. Nous n'avions pas de log produit sur le serveur, là ou on voyait dans le debugueur du browser dans l'onglet network que le client javascript tentait de se connecter au serveur. En consultant la doc de netty-socketio nous avons vu qu'il ne supportait que les versions 1.0+ de socket.io-client. Nous avons donc adapté notre code à la version antérieure de socket.io-client et après cela, socket.io fonctionnait.
+- Pour socket.io la difficulté que nous avons rencontré était pour faire communiquer le serveur java et le client javascript. En effet nous utilisions la dernière version de socket.io-client sur le client javascript (4.1.3) et nos tentatives de connexions au serveur ne fonctionnait pas. Nous n'avions pas de log produit sur le serveur, là où on voyait dans le debugueur du browser dans l'onglet network que le client javascript tentait de se connecter au serveur. En consultant la doc de netty-socketio nous avons vu qu'il ne supportait que les versions 1.0+ de socket.io-client. Nous avons donc adapté notre code à la version antérieure de socket.io-client et après cela, socket.io fonctionnait.
 Nous avons aussi rencontré une autre difficulté pour socket.io, comme il y avait déjà le serveur websocket qui était éxécuté sur le port 8080 de la machine, on ne pouvait pas lancer socket.io sur le même port que websocket même sur un autre namespace. C'est pour cela qu'il s'éxécute sur le port 8082.

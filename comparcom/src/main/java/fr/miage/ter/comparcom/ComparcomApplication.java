@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.SocketIOServer;
 
 @SpringBootApplication
 public class ComparcomApplication {
@@ -21,5 +23,13 @@ public class ComparcomApplication {
 				registry.addMapping("/**").allowedOrigins("http://localhost:8081");
 			}
 		};
+	}
+
+	@Bean
+	public SocketIOServer socketIoServer(){
+		Configuration config = new Configuration();
+		config.setHostname("localhost");
+		config.setPort(8082);
+		return new SocketIOServer(config);
 	}
 }

@@ -45,19 +45,19 @@
       </form>
     </div>
 
-    <div>
+    <!-- <div>
       <request-payload v-model="payload" />
-    </div>
+    </div> -->
   </div>
 </template>
 Ò
 <script>
-import RequestPayload from "@/components/RequestPayload";
+// import RequestPayload from "@/components/RequestPayload";
 
 export default {
-  components: {
-    "request-payload": RequestPayload,
-  },
+  // components: {
+  //   "request-payload": RequestPayload,
+  // },
   props: {
     modelValue: {
       type: Object,

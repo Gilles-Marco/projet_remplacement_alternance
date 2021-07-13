@@ -31,12 +31,12 @@ public class HelloWorldWebSocket implements WebSocketMessageBrokerConfigurer {
         config.setApplicationDestinationPrefixes("/");
     }
 
-    @MessageMapping("/helloSpring")
-    @SendTo("/helloJS")
+    @MessageMapping("/helloSpringWS")
+    @SendTo("/helloJSWS")
     public String helloWorldWebSocket(@Payload String message){
         logger.info("Message received from websocket/stomp");
         logger.info(message);
-        return "Spring say hello back to Javascript";
+        return "SpringWS say hello back to Javascript";
     }
 
 }

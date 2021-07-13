@@ -24,7 +24,12 @@
         :body="websocket.body"
       >
       </request-card>
-      <request-card title="SOCKETIO" @send-request="ajax_request">
+      <request-card
+        title="SOCKETIO"
+        @send-request="socketio_request"
+        :headers="socketio.headers"
+        :body="socketio.body"
+      >
       </request-card>
     </section>
   </div>
@@ -33,6 +38,7 @@
 <script>
 import * as SockJS from "sockjs-client";
 import * as Stomp from "stomp-websocket";
+import { connect } from "socket.io-client";
 
 import RequestCard from "@/components/RequestCard";
 import RequestConfigurator from "@/components/RequestConfigurator";
@@ -53,6 +59,10 @@ export default {
         body: "",
       },
       websocket: {
+        headers: [],
+        body: "",
+      },
+      socketio: {
         headers: [],
         body: "",
       },
@@ -101,7 +111,7 @@ export default {
       let stompClient = Stomp.over(socket);
       stompClient.debug = null;
       stompClient.connect({}, (frame) => {
-        stompClient.subscribe("/helloJS", (message) => {
+        stompClient.subscribe("/helloJSWS", (message) => {
           let body = message.body;
           delete message.body;
           this.websocket.headers = [message.headers];
@@ -109,10 +119,25 @@ export default {
           socket.close();
         });
 
-        stompClient.send("/helloSpring", {}, "Javascript say hello to Spring");
+        stompClient.send(
+          "/helloSpringWS",
+          {},
+          "Javascript say hello to Spring Websocket"
+        );
       });
     },
-    socketio_request: function () {},
+    socketio_request: function () {
+      let sio = connect("http://localhost:8082/socketio");
+
+      sio.on("connect", () => {
+        sio.emit("helloSpringSocketIO", "Hello Spring SocketIO !");
+      });
+
+      sio.on("helloJSSocketIO", (message) => {
+        this.socketio.body = message;
+        sio.close();
+      });
+    },
   },
 };
 </script>

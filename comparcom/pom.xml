@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>fr.miage.ter</groupId>
 	<artifactId>comparcom</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>comparcom</name>
 	<description>Comparaison des différentes méthodes de communication web</description>
 	<properties>

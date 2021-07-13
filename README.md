@@ -11,3 +11,6 @@ Dans les attendus :
 ## Ré-orientation du projet
 
 Je vous propose une réorientation pour le début du travail de remplacement (et on verra ensuite) : de vous concentrer pour l'instant sur l'étude de communication java (back-end ou micro service) - js (front end ou back end) (avec ou sans framework) : ajax / fetch / websocket / socketio / requete dans un framework / etc.. Accompagnez cela d'un petit exemple (du code). Et proposez une analyse pour comparer les solutions.
+
+# Rapport de développement
+
